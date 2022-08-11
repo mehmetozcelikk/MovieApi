@@ -1,0 +1,95 @@
+﻿@model CustomMovieVM
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    
+    @Html.Partial("_PartialMovie", Model)
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="movie-ticket">
+  <div class="container-fluid">
+    <!-- Item test -->
+    <div class="ui-item">
+      <!-- Head -->
+      <div class="ui-head">
+        <!-- Background Image -->
+        <img src="@Model.baseimgurl@Model.movieDetailVM.backdrop_path?width=900&height=660"  alt="" class="img-responsive bg-img">
+        <!-- Transparent Background -->
+        <div class="ui-trans clearfix">
+          <!-- Image -->
+          <img src="@Model.baseimgurl@Model.movieDetailVM.poster_path" alt="" class="img-responsive">
+          <!-- Details -->
+          <div class="ui-details clearfix">
+            <!-- Movie Name -->
+            <h2><a href="#">@Model.movieDetailVM.title</a></h2>
+            <!-- Labels -->
+            <a href="#" class="label">@Model.movieDetailVM.release_date</a>
+            <a href="#" class="label">adult:@Model.movieDetailVM.adult</a>
+            <a href="#" class="label">Movie's Time:@Model.movieDetailVM.runtime</a>
+            @foreach (var item in @Model.movieDetailVM.genres)
+                            {
+            <a href="#" class="label">@item.name</a>
+                                
+                            }
+            <!-- Paragraph -->
+            <p>@Model.movieDetailVM.tagline</p>
+            <!-- Heading -->
+            <h4><span>Imdb Code</span>:</h4>
+            <!-- Director Name -->
+            <h5><a href="#">@Model.movieDetailVM.imdb_id</a></h5>
+                <!-- Heading -->
+                            
+            <h4><span>Companies</span>:</h4>
+            <!-- Writers -->
+            <h5><a href="#"> @foreach (var item in @Model.movieDetailVM.production_companies)
+                                    {
+                                        @item.name
+                                    }</a></h5>
+            <!-- Heading -->
+@*            <h4><span>Stars</span>:</h4>
+            <!-- Stars -->
+            <h5><a href="#">Slorm Mckency. ,</a> <a href="#">Maring lawyent ,</a> <a href="#">Lowin cleanting</a></h5>*@
+          </div>
+        </div>
+      </div>
+        <!-- Review -->
+        <div class="ui-review">
+          <!-- Heading -->
+          <h3>@Model.movieDetailVM.title</h3>
+          <!-- Paragraph -->
+          <p>overview <br /> @Model.movieDetailVM.overview</p>
+          <!-- Buttons -->
+@*          <a href="#" class="ui-btn bg-red"><i class="fa fa-ticket"></i> Buy Tickets</a>
+          <a href="#" class="ui-btn bg-green"><i class="fa fa-dot-circle-o"></i> Buy DVDs</a>*@
+        </div>
+      </div>  
+    </div>
+</div>                                
+                             
+
+
+        @Html.Partial("_PartialSimilarMovies", Model)
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

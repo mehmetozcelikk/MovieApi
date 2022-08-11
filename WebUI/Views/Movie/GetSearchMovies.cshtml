@@ -1,0 +1,95 @@
+﻿@model CustomMovieVM
+@addTagHelper *, LazZiya.TagHelpers
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/css/site.css">
+
+</head>
+<body>
+
+
+
+
+
+    @Html.Partial("_PartialMovie", Model)
+
+
+
+
+@*          <img  src="@Model.baseimgurl@item.poster_path"  class="card__image" alt="" />
+*@
+  <ul class="cards">
+     @foreach (var item in Model.movieSearchVMs.Results){
+       
+  <li>
+    <a href="" class="card">
+
+         @if (item.poster_path==null)
+            {   
+               <img  src="~/images/png-transparent-red-paint-brushes-red-paint-brushes-red-cross-on-red-fork.png" class="card__image" alt="" />
+            }
+         @if (item.poster_path!=null)
+            {
+               <img  src="@Model.baseimgurl@item.poster_path" class="card__image" alt="" />                                
+            }
+             
+       <div class="card__overlay">
+        <div class="card__header">
+          <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
+         @if (item.backdrop_path==null)
+            {   
+               <img class="card__thumb" src="~/images/png-transparent-red-paint-brushes-red-paint-brushes-red-cross-on-red-fork.png"  alt="" />
+            }
+         @if (item.backdrop_path!=null)
+            {
+               <img class="card__thumb" src="@Model.baseimgurl@item.backdrop_path" alt="" />                                
+            }          
+          <div class="card__header-text">
+            <h3 class="card__title">@item.title</h3>            
+            <span class="card__status">@item.release_date</span>
+           
+          </div>
+        </div>
+        <p class="card__description">@item.overview</p>
+      </div>
+      <div>              <a class="btn btn-primary text-white" asp-action="GetMovieDetail" asp-route-id="@item.Id">Movie's Detail</a>
+</div>
+    </a>      
+  </li>
+     }
+   
+</ul>   
+@*<pagination 
+    total-items="@Model.movieSearchVMs.Total_Pages"
+    ng-model="@Model.movieSearchVMs.Page"
+    max-size="5"
+    boundary-links="true"
+    rotate="false"
+    num-pages="reviews.noPages"
+    ng-change="changePageTo(reviews.pageNo)"></pagination>
+*@
+
+<paging page-no="@Model.movieSearchVMs.Page"
+        page-size="20"
+        total-records="@Model.movieSearchVMs.Total_Pages*20"
+        query-string-value="@@(Request.QueryString.Value)"
+            query-string-key-page-no="i">
+
+</paging>
+@*@for (int i = 0; i < Model.movieSearchVMs.Total_Pages; i++)
+    {
+        <ul class="pagination" >
+            @{
+                int pages = i + 1;
+            }
+            <li><a  href="https://localhost:7006/Movie/GetSearchMovies?query=@Model.movieSearchVMs.query&i=@pages" >@pages</a></li>
+        </ul>
+    }*@
+</body>
+
+
