@@ -28,7 +28,7 @@ namespace WebUI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetSearchMovies(string query, int page = 1)  // sayfalama için kütüphane kullanmadım 
+        public IActionResult GetSearchMovies(string query, int page = 1) 
         {
             var data = GetData("search", Convert.ToString(page), "1", query);
 
