@@ -28,16 +28,16 @@ namespace WebUI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetSearchMovies(string query, int i = 1)  // sayfalama için kütüphane kullanmadım 
+        public IActionResult GetSearchMovies(string query, int page = 1)  // sayfalama için kütüphane kullanmadım 
         {
-            var data = GetData("search", Convert.ToString(i), "1", query);
+            var data = GetData("search", Convert.ToString(page), "1", query);
 
             var value = JsonConvert.DeserializeObject<MovieSearchVM>(data);
             value.query = query;    
 
             var customMovieVM = GetCustomMovieVM();           // Türkiye’de yakında vizyona girecek olan filmlerin listesi
             customMovieVM.movieSearchVMs = value;
-            customMovieVM.movieSearchVMs.Page=i;
+            customMovieVM.movieSearchVMs.Page=page;
             return View(customMovieVM);
         }
 

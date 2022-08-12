@@ -19,7 +19,7 @@ namespace Business.Concrete
         {
             HttpClient client = new HttpClient();
 
-            var searchMoviesVM = client.GetAsync("https://api.themoviedb.org/3/" + url + "/movie" + "?api_key=ec80cb6f4cc9c116212c2f138b6e7824&language=tr-tr&query=" + query + "&page=" + page + "&include_adult=false/").Result;
+            var searchMoviesVM = client.GetAsync("https://api.themoviedb.org/3/" + url + "/movie" + "?api_key=ec80cb6f4cc9c116212c2f138b6e7824&language=en-US&query=" + query + "&page=" + page + "&include_adult=false/").Result;
             var searchvalue = searchMoviesVM.Content.ReadAsStringAsync().Result;
             return searchvalue;
         }
@@ -28,7 +28,7 @@ namespace Business.Concrete
         {
             HttpClient client = new HttpClient();
 
-            var similarMoviesVM = client.GetAsync("https://api.themoviedb.org/3/movie/" + id + "/" + url + "?api_key=ec80cb6f4cc9c116212c2f138b6e7824&language=tr-tr&page=" + page).Result;
+            var similarMoviesVM = client.GetAsync("https://api.themoviedb.org/3/movie/" + id + "/" + url + "?api_key=ec80cb6f4cc9c116212c2f138b6e7824&language=en-US&page=" + page).Result;
             var value = similarMoviesVM.Content.ReadAsStringAsync().Result;
             return value;
         }
